@@ -1,0 +1,14 @@
+version: 0.2
+
+env:
+  variables:
+    PROJECT: employee-data-app-sruthi
+
+phases:
+  build:
+    commands:
+      - ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+      - (cd lambda && zip -r ../function.zip .)
+      - aws lambda update-function-code --function-name $PROJECT-export --zip-file fileb://function.zip
+      - aws lambda wait function-updated --function-name $PROJECT-export
+      - aws s3 cp glue/transform.py s3://$PROJECT-$ACCOUNT/scripts/transform.py

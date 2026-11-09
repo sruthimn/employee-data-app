@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - pip install -r requirements-dev.txt
+  build:
+    commands:
+      - python -m pytest -v
+      - python -m py_compile glue/transform.py
