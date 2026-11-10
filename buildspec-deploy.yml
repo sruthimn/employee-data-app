@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    PROJECT: employee-data-app-sruthi
+    PROJECT: employee-data-sruthi
 
 phases:
   build:
