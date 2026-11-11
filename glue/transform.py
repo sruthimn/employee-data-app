@@ -24,8 +24,10 @@ clean = (
            .when(F.col("salary") < 100000, "Medium")
            .otherwise("High"),
       )
-      .withColumn("load_date", F.lit(args["LOAD_DATE"]))
+
 )
 
-clean.write.mode("append").parquet(out_path)
-print(f"Wrote {clean.count()} rows to {out_path}")
+day_path = f"{out_path}load_date={args['LOAD_DATE']}/"
+clean.write.mode("overwrite").parquet(day_path)
+
+print(f"Wrote {clean.count()} rows to {day_path} in parquet format.")
